@@ -1,0 +1,10 @@
+dist
+.yarn
+.vscode
+node_modules
+src/Private/Data.ts
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
