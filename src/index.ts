@@ -12,7 +12,6 @@ const d: D = {
 	commands: bot.cmds,
 	db: bot.db,
 	embed: new MessageEmbed(),
-	args: [],
 	f: Functions
 };
 
