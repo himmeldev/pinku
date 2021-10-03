@@ -2,6 +2,7 @@ dist
 .yarn
 .vscode
 node_modules
+json.sqlite
 src/Private/Data.ts
 !.yarn/cache
 !.yarn/releases

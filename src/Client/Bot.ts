@@ -1,4 +1,4 @@
-import { Client, Collection, Intents, MessageEmbed, MessageEmbedOptions } from "discord.js";
+import { Client, Collection, Intents, MessageEmbed, MessageEmbedOptions, User } from "discord.js";
 import glob from "glob";
 import db from "quick.db";
 import { promisify } from "util";
@@ -12,7 +12,7 @@ class Bot extends Client {
 	public aliases: Collection<string, string> = new Collection();
 	public db: typeof db = db;
 
-	public owner; // Defined in 'ready.ts' event.
+	public owner: User; // Defined in 'ready.ts' event.
 
 	constructor() {
 		super({
@@ -42,12 +42,17 @@ class Bot extends Client {
 		},
 		embed: (data?: MessageEmbedOptions): MessageEmbed => {
 			return new MessageEmbed({ ...data, description: data.description || "Default description." });
+		},
+		owner: (id?: string) => {
+			const d = ["278342221202194434"];
+			if (!id) return d;
+
+			return d.includes(id);
 		}
 	};
 
 	public async start(config: { token: string; [key: string]: any }) {
 		const commands = await pGlob(`${__dirname}/../commands/**/*{.ts,.js}`);
-		const events = await pGlob(`${__dirname}/../events/**/*{.ts,.js}`);
 
 		commands.map(async (file) => {
 			let cmd = await import(file);
@@ -71,14 +76,7 @@ class Bot extends Client {
 			}
 		});
 
-		events.map(async (file) => {
-			let event = await import(file);
-			if (event.default) event = event.default;
-
-			if (!event.name) return console.error(`Error! Missing name to ${file}`);
-
-			this.on(event.name, event.bind(null, this));
-		});
+		
 
 		this.login(config.token);
 	}

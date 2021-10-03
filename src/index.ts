@@ -3,6 +3,7 @@ import { D } from "./Util/Interfaces";
 import { configuration } from "./Private/Data";
 import { MessageEmbed } from "discord.js";
 import { Functions } from "./Client/Functions";
+import { loadEvents } from "./Client/Events";
 
 const bot = new Bot();
 const client = bot;
@@ -14,6 +15,8 @@ const d: D = {
 	embed: new MessageEmbed(),
 	f: Functions
 };
+
+loadEvents(d);
 
 export default {
 	client,

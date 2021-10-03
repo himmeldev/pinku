@@ -22,11 +22,11 @@ export interface Description {
 }
 
 export interface RunCommand {
-	async(d: D): any;
+	(d: D): any;
 }
 
 export interface RunEvent {
-	async(d: D, ...args: any[]): any;
+	(d: D, ...args: any[]): any;
 }
 
 export interface D {
