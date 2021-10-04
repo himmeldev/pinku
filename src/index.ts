@@ -6,9 +6,9 @@ import { Functions } from "./Client/Functions";
 import { loadEvents } from "./Client/Events";
 
 const bot = new Bot();
-const client = bot;
+export const client = bot;
 
-const d: D = {
+export const d: D = {
 	client,
 	commands: bot.cmds,
 	db: bot.db,
@@ -17,10 +17,5 @@ const d: D = {
 };
 
 loadEvents(d);
-
-export default {
-	client,
-	d
-};
 
 bot.start(configuration);
