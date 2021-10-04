@@ -5,7 +5,7 @@ import { Functions } from "../Client/Functions";
 
 export interface Command {
 	name: string;
-	type: "slash" | "UIInteraction" | "button" | "basic" | "alwaysExecute";
+	type: "slash" | "UIInteraction" | "button" | "basic" | "onMessage";
 	cooldown: {
 		type: "user" | "guild";
 		time: "none" | string;
