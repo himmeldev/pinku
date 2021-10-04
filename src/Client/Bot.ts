@@ -2,15 +2,17 @@ import { Client, Collection, Intents, MessageEmbed, MessageEmbedOptions, User } 
 import glob from "glob";
 import db from "quick.db";
 import { promisify } from "util";
+import { Command } from "../Util/Interfaces";
 
-import { configuration } from "../Private/Data";
+const exampleTable = new db.table("ExampleTable");
 
 const pGlob = promisify(glob);
 
 class Bot extends Client {
-	public cmds: Collection<string, any> = new Collection();
+	public cmds: Collection<string, Command> = new Collection();
 	public aliases: Collection<string, string> = new Collection();
 	public db: typeof db = db;
+	public cds: typeof exampleTable = new db.table("cooldowns");
 
 	public owner: User; // Defined in 'ready.ts' event.
 
@@ -75,8 +77,6 @@ class Bot extends Client {
 				}
 			}
 		});
-
-		
 
 		this.login(config.token);
 	}
