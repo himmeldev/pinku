@@ -1,10 +1,16 @@
-import { Collection, GuildMember, Message, MessageEmbed, User } from "discord.js";
+import { Collection, GuildMember, Message, MessageEmbed, User, CommandInteraction, ContextMenuInteraction, ButtonInteraction, SelectMenuInteraction } from "discord.js";
 import { Bot } from "../Client/Bot";
 import db from "quick.db";
 import { Functions } from "../Client/Functions";
 
 export interface Command {
 	name: string;
+	type: "slash" | "UIInteraction" | "button" | "basic" | "alwaysExecute";
+	cooldown: {
+		type: "user" | "guild";
+		time: "none" | string;
+	};
+	testing: boolean;
 	aliases?: string | string[];
 	description?: string | Description;
 	run: RunCommand;
@@ -22,7 +28,7 @@ export interface Description {
 }
 
 export interface RunCommand {
-	(d: D): any;
+	(d: D, Interaction?: CommandInteraction | ContextMenuInteraction | ButtonInteraction | SelectMenuInteraction): any;
 }
 
 export interface RunEvent {
@@ -34,11 +40,19 @@ export interface D {
 	message?: string | Message;
 	command?: Command;
 	db: typeof db | any;
-	guild?: string | { id: string; data: any };
-	user?: string | User | GuildMember;
+	guild?: string;
+	user?: string | User;
 	embed: MessageEmbed;
 	args?: string[];
 	interaction?: { request: object[] };
 	f: typeof Functions;
 	commands: Collection<string, any>;
+}
+
+export interface DData {
+	message?: string | Message;
+	command?: Command;
+	guild?: string;
+	user?: string | User;
+	args?: string[];
 }
