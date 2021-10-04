@@ -2,7 +2,9 @@ import { D, RunEvent } from "../Util/Interfaces";
 
 export const name: string = "ready";
 export const run: RunEvent = async (d: D) => {
-	d.client.owner = d.client.users.cache.get(d.client.d.owner()[0]) || (await d.client.users.fetch(d.client.d.owner()[0]));
+	const { client } = d;
 
-	console.log("Ready on client " + d.client.user.tag);
+	client.owner = client.users.cache.get(client.d.owner()[0]) || (await client.users.fetch(client.d.owner()[0]));
+
+	console.log("Ready on client " + client.user.tag);
 };
