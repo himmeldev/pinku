@@ -16,12 +16,12 @@ export const Functions = {
 
 		return await message.channel.send(d).catch(async (err) => await message.channel.send({ ...data }).catch(async (err) => await contactFunction(client, err)));
 	},
-	setCD: async (command: Command, target: string, d: D) => {
+	setCD: async (command: Command, target: string, d: D): Promise<boolean> => {
 		const { cooldown } = command;
 		const { client } = d;
 		const { cds } = client;
 
-		if (cooldown.time === "none") return true;
+		if (cooldown.time === "none") return false;
 
 		const time = ms(cooldown.time);
 		if (!cds.has(command.name)) cds.set(command.name, {});
@@ -37,27 +37,27 @@ export const Functions = {
 				break;
 		}
 
-		if (!t) return true;
+		if (!t) return false;
 
 		const now = Date.now();
 		const expiration = Math.floor((cds.get(command.name)[target] || 0) + Number(time));
 		const all = cds.get(command.name);
 
-		if (now < expiration && !command.testing) return false;
+		if (now < expiration && !command.testing) return true;
 
 		if (now > expiration) {
 			all[target] = 0;
 
 			cds.set(command.name, all);
 
-			return true;
+			return false;
 		}
 
 		all[target] = now + Number(time);
 
 		cds.set(command.name, all);
 
-		return false;
+		return true;
 	}
 };
 
