@@ -1,6 +1,6 @@
 import { GuildMember, Message, User } from "discord.js";
 import { D } from "../Util/Interfaces";
-const idRegex = /[0-9]{10,30}/g;
+import { idRegex } from "../Util/Regex";
 
 export const findUser = async (d: D, query: string, message: Message, returnAuthor = true) => {
 	const { client } = d;
