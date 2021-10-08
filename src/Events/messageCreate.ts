@@ -9,7 +9,8 @@ export const name = "messageCreate";
 export const run: RunEvent = async (d: D, message: Message) => {
 	if (message.author.bot || !message.guild) return;
 
-	const GuildConfig = new d.db("GuildsData").get(message.guildId);
+	const GuildsConfig = new d.db.table("GuildsData");
+	const GuildConfig = GuildsConfig.get(message.guild.id) || GuildsConfig.set(message.guild.id, {});
 	const prefix = GuildConfig["prefix"] || d.configuration.prefix;
 	const args =
 		message.content
@@ -20,7 +21,7 @@ export const run: RunEvent = async (d: D, message: Message) => {
 
 	onMessage(message, d);
 
-	if (message.content.match(idRegex)[0] === d.client.user.id && args.length === 1) return d.f.reply(CreateInstance(d, { message }), { content: "Hai~ I'm " + d.client.user.username + "!" });
+	if (message.content.match(idRegex)?.at(0) === d.client.user.id && args.length === 1) return d.f.reply(CreateInstance(d, { message }), { content: "Hai~ I'm " + d.client.user.username + "!" });
 
 	if (!message.content.startsWith(prefix)) return;
 
