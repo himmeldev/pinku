@@ -58,7 +58,8 @@ class Bot extends Client {
 
 		commands.map(async (file) => {
 			let cmd = await import(file);
-			if (cmd.default) cmd = cmd.default;
+			if (cmd.default?.name) cmd = cmd.default;
+			if (cmd.data?.name) cmd = cmd.data;
 
 			if (!cmd.name) return console.error(`Error! Missing name to ${file}`);
 			if (this.cmds.get(cmd.name)) return console.error(`Error! Found duplicated command: ${cmd.name} (${file})`);
