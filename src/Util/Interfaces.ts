@@ -14,6 +14,7 @@ export interface Command {
 	aliases?: string | string[];
 	description?: string | Description;
 	category: "general" | "developer";
+	usage: string;
 	run: RunCommand;
 }
 
