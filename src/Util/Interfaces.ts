@@ -46,7 +46,10 @@ export interface D {
 	args?: string[];
 	interaction?: { request: object[] };
 	f: typeof Functions;
-	commands: Collection<string, any>;
+	commands: Collection<string, Command>;
+	configuration: {
+		prefix: string;
+	};
 }
 
 export interface DData {
