@@ -13,6 +13,7 @@ export interface Command {
 	testing?: boolean;
 	aliases?: string | string[];
 	description?: string | Description;
+	category: "general" | "developer";
 	run: RunCommand;
 }
 
@@ -37,7 +38,7 @@ export interface RunEvent {
 
 export interface D {
 	client: Bot;
-	message?: string | Message;
+	message?: Message;
 	command?: Command;
 	db: typeof db | any;
 	guild?: string;
