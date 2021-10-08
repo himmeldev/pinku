@@ -13,7 +13,10 @@ export const d: D = {
 	commands: bot.cmds,
 	db: bot.db,
 	embed: new MessageEmbed(),
-	f: Functions
+	f: Functions,
+	configuration: {
+		prefix: "$"
+	}
 };
 
 loadEvents(d);
