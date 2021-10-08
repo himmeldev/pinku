@@ -1,4 +1,4 @@
-import { Collection, GuildMember, Message, MessageEmbed, User, CommandInteraction, ContextMenuInteraction, ButtonInteraction, SelectMenuInteraction } from "discord.js";
+import { Collection, GuildMember, Message, MessageEmbed, User, CommandInteraction, ContextMenuInteraction, ButtonInteraction, SelectMenuInteraction, Guild } from "discord.js";
 import { Bot } from "../Client/Bot";
 import db from "quick.db";
 import { Functions } from "../Client/Functions";
@@ -55,9 +55,9 @@ export interface D {
 }
 
 export interface DData {
-	message?: string | Message;
+	message?: Message;
 	command?: Command;
-	guild?: string;
-	user?: string | User;
+	guild?: Guild;
+	user?: User;
 	args?: string[];
 }
