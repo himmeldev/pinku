@@ -42,8 +42,8 @@ export interface D {
 	message?: Message;
 	command?: Command;
 	db: typeof db | any;
-	guild?: string;
-	user?: string | User;
+	guild?: Guild;
+	user?: User;
 	embed: MessageEmbed;
 	args?: string[];
 	interaction?: { request: object[] };
