@@ -2,7 +2,8 @@ import { Message, MessageOptions } from "discord.js";
 import { contactFunction } from "../Util/ContactDeveloper";
 import { D } from "../Util/Interfaces";
 
-export const reply = async (message: Message, data: MessageOptions, d: D): Promise<Message | void> => {
+export const reply = async (d: D, data: MessageOptions): Promise<Message | void> => {
+	const { message } = d;
 	const messageData = {
 		content: data.content || null,
 		reply: {
