@@ -1,4 +1,4 @@
-import { Command, D } from "../Util/Interfaces";
+import { D } from "../Util/Interfaces";
 import { reply } from "../Functions/reply";
 import { setCD } from "../Functions/setCD";
 
