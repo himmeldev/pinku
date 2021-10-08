@@ -10,7 +10,7 @@ export interface Command {
 		type: "user" | "guild";
 		time: "none" | string;
 	};
-	testing: boolean;
+	testing?: boolean;
 	aliases?: string | string[];
 	description?: string | Description;
 	run: RunCommand;
