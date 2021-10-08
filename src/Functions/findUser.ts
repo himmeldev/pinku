@@ -7,7 +7,7 @@ export const findUser = async (d: D, query: string, message: Message, returnAuth
 
 	if (!query) return message.author;
 
-	if (query.match(idRegex)[0]) return client.users.cache.get(query.match(/[0-9]{10,30}/g)[0]) || (await client.users.fetch(query.match(idRegex)[0]).catch((err) => null));
+	if (query.match(idRegex)[0]) return client.users.cache.get(query.match(idRegex)[0]) || (await client.users.fetch(query.match(idRegex)[0]).catch((err) => null));
 
 	query = query?.trim()?.toLowerCase();
 
