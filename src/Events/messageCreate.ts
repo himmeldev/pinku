@@ -9,6 +9,8 @@ export const name = "messageCreate";
 export const run: RunEvent = async (d: D, message: Message) => {
 	if (message.author.bot || !message.guild) return;
 
+	const Instance = CreateInstance(d, { message });
+
 	const GuildsConfig = new d.db.table("GuildsData");
 	const GuildConfig = GuildsConfig.get(message.guild.id) || GuildsConfig.set(message.guild.id, {});
 	const prefix = GuildConfig["prefix"] || d.configuration.prefix;
@@ -21,7 +23,12 @@ export const run: RunEvent = async (d: D, message: Message) => {
 
 	onMessage(message, d);
 
-	if (message.content.match(idRegex)?.at(0) === d.client.user.id && args.length === 1) return d.f.reply(CreateInstance(d, { message }), { content: "Hai~ I'm " + d.client.user.username + "!" });
+	Instance.args = args
+	Instance.configuration.prefix = prefix;
+	Instance.user = message.author;
+	Instance.guild = message.guild;
+
+	if (message.content.match(idRegex)?.at(0) === d.client.user.id && args.length === 1) return d.f.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
 
 	if (!message.content.startsWith(prefix)) return;
 
@@ -30,20 +37,21 @@ export const run: RunEvent = async (d: D, message: Message) => {
 	if (!cmd.length) return;
 
 	const command: Command = d.commands.get(cmd) || d.commands.get(d.commands.find((c: Command) => c.aliases.includes(cmd)).name);
+	Instance.command = command;
 
 	try {
-		if (command.category === "developer" && !d.client.d.owner(message.author.id)) return d.f.reply(CreateInstance(d, { message }), { content: "Oops~ This command is only for my developers!" });
+		if (command.category === "developer" && !d.client.d.owner(message.author.id)) return d.f.reply(Instance, { content: "Oops~ This command is only for my developers!" });
 
 		const target = command.cooldown.type === "user" ? message.author.id : message.guild.id;
-		const InCooldown = await d.f.setCD(command, target, d);
+		const InCooldown = await d.f.setCD(command, target, Instance);
 
-		if (InCooldown) return d.f.reply(CreateInstance(d, { message }), { content: `This command is on cooldown! Please wait **${d.f.getCooldown(command, target, d)}** to use this command again.` });
+		if (InCooldown) return d.f.reply(Instance, { content: `This command is on cooldown! Please wait **${d.f.getCooldown(command, target, d)}** to use this command again.` });
 
 		if (!command.usage && args[0] && command.category !== "developer") return;
 
-		await command.run(CreateInstance(d, { args, command, guild: message.guild, message, user: message.author }));
+		await command.run(Instance);
 	} catch (err) {
 		await contactFunction(d.client, err);
-		return d.f.reply(CreateInstance(d, { message }), { content: "I'm sorry! An unexpected bug has happened! The error has been already reported~" });
+		return d.f.reply(Instance, { content: "I'm sorry! An unexpected bug has happened! The error has been already reported~" });
 	}
 };

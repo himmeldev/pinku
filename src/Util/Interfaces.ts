@@ -1,4 +1,4 @@
-import { Collection, GuildMember, Message, MessageEmbed, User, CommandInteraction, ContextMenuInteraction, ButtonInteraction, SelectMenuInteraction, Guild } from "discord.js";
+import { Collection, Message, MessageEmbed, User, CommandInteraction, ContextMenuInteraction, ButtonInteraction, SelectMenuInteraction, Guild } from "discord.js";
 import { Bot } from "../Client/Bot";
 import db from "quick.db";
 import { Functions } from "../Client/Functions";
