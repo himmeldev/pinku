@@ -1,13 +1,13 @@
 import { GuildMember, Message, User } from "discord.js";
 import { D } from "../Util/Interfaces";
-import { idRegex } from "../Util/Regex";
+import { findMentions } from "../Util/Regex";
 
 export const findUser = async (d: D, query: string, message: Message, returnAuthor = true) => {
 	const { client } = d;
 
 	if (!query) return message.author;
 
-	if (query.match(idRegex)[0]) return client.users.cache.get(query.match(idRegex)[0]) || (await client.users.fetch(query.match(idRegex)[0]).catch((err) => null));
+	if (findMentions(query, "ids")[0]) return client.users.cache.get(findMentions(query, "ids")[0]) || (await client.users.fetch(findMentions(query, "ids")[0]).catch((err) => null));
 
 	query = query?.trim()?.toLowerCase();
 

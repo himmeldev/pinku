@@ -3,7 +3,7 @@ import { contactFunction } from "../Util/ContactDeveloper";
 import { CreateInstance } from "../Util/CreateInstance";
 import { Command, D, RunEvent } from "../Util/Interfaces";
 import { onMessage } from "../Util/onMessageHandler";
-import { idRegex } from "../Util/Regex";
+import { findMentions } from "../Util/Regex";
 
 export const name = "messageCreate";
 export const run: RunEvent = async (d: D, message: Message) => {
@@ -28,7 +28,7 @@ export const run: RunEvent = async (d: D, message: Message) => {
 	Instance.user = message.author;
 	Instance.guild = message.guild;
 
-	if (message.content.match(idRegex)?.at(0) === d.client.user.id && args.length === 1) return d.f.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
+	if (findMentions(message.content, "ids")[0] === d.client.user.id && args.length === 1) return d.f.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
 
 	if (!message.content.startsWith(prefix)) return;
 
