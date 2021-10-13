@@ -28,7 +28,7 @@ export const run: RunEvent = async (d: D, message: Message) => {
 	Instance.user = message.author;
 	Instance.guild = message.guild;
 
-	if (findMentions(message.content, "ids")[0] === d.client.user.id && args.length === 1) return d.f.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
+	if (findMentions(message.content, "ids")?.at(0) === d.client.user.id && args.length === 1) return d.f.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
 
 	if (!message.content.startsWith(prefix)) return;
 
