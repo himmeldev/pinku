@@ -1,6 +1,6 @@
 import { Client, Collection, Intents, MessageEmbed, MessageEmbedOptions, User } from "discord.js";
 import glob from "glob";
-import db from "quick.db";
+import * as db from "quick.db";
 import { promisify } from "util";
 import { Command } from "../Util/Interfaces";
 
