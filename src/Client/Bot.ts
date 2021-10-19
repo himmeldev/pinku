@@ -42,9 +42,6 @@ class Bot extends Client {
 
 			return result;
 		},
-		embed: (data?: MessageEmbedOptions): MessageEmbed => {
-			return new MessageEmbed({ ...data, description: data.description || "Default description." });
-		},
 		owner: (id?: string): string[] | boolean => {
 			const d = ["278342221202194434"];
 			if (!id) return d;
