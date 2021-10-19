@@ -10,6 +10,14 @@ export interface Player {
 			max: number;
 		};
 	};
+	stats: {
+		life: number;
+		strength: number;
+		speed: number;
+		TestingGodMode: 0 | 1;
+	};
+	buffs: Effect[];
+	debuffs: Effect[];
 }
 
 export interface HealingItem {
@@ -32,14 +40,16 @@ export interface HealingItem {
 }
 
 export interface Effect {
+	Name: string;
 	Type: "buff" | "debuff";
 	EffectType: "player" | "party";
 	Description: string;
 	Stats: Stat[];
+	Duration: string;
 }
 
 export interface Stat {
-	name: "defense" | "life" | "TestingGodMode";
+	name: "life" | "strength" | "speed";
 	value: number | "max";
 	/**
 	 * Example value: +5 | -20 | 1
