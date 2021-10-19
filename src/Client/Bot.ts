@@ -23,7 +23,7 @@ class Bot extends Client {
 		});
 	}
 
-	public d = {
+	public data = {
 		color: (query?: string): string => {
 			if (!query) return "292841";
 

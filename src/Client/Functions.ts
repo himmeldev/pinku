@@ -14,5 +14,5 @@ export const Functions = {
 };
 
 export const reloadFunctions = (d: D) => {
-	d.f = Functions;
+	d.Util = Functions;
 };

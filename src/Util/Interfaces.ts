@@ -47,7 +47,7 @@ export interface D {
 	embed: MessageEmbed;
 	args?: string[];
 	interaction?: { request: object[] };
-	f: typeof Functions;
+	Util: typeof Functions;
 	commands: Collection<string, Command>;
 	configuration: {
 		prefix: string;

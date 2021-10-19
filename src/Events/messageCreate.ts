@@ -28,7 +28,7 @@ export const run: RunEvent = async (d: D, message: Message) => {
 	Instance.user = message.author;
 	Instance.guild = message.guild;
 
-	if (findMentions(message.content, "ids")?.at(0) === d.client.user.id && args.length === 1) return d.f.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
+	if (findMentions(message.content, "ids")?.at(0) === d.client.user.id && args.length === 1) return d.Util.reply(Instance, { content: "Hai~ I'm " + d.client.user.username + "!" });
 
 	if (!message.content.startsWith(prefix)) return;
 
@@ -40,18 +40,18 @@ export const run: RunEvent = async (d: D, message: Message) => {
 	Instance.command = command;
 
 	try {
-		if (command.category === "developer" && !d.client.d.owner(message.author.id)) return d.f.reply(Instance, { content: "Oops~ This command is only for my developers!" });
+		if (command.category === "developer" && !d.client.d.owner(message.author.id)) return d.Util.reply(Instance, { content: "Oops~ This command is only for my developers!" });
 
 		const target = command.cooldown.type === "user" ? message.author.id : message.guild.id;
-		const InCooldown = await d.f.setCD(command, target, Instance);
+		const InCooldown = await d.Util.setCD(command, target, Instance);
 
-		if (InCooldown) return d.f.reply(Instance, { content: `This command is on cooldown! Please wait **${d.f.getCooldown(command, target, d)}** to use this command again.` });
+		if (InCooldown) return d.Util.reply(Instance, { content: `This command is on cooldown! Please wait **${d.Util.getCooldown(command, target, d)}** to use this command again.` });
 
 		if (!command.usage && args[0] && command.category !== "developer") return;
 
 		await command.run(Instance);
 	} catch (err) {
 		await contactFunction(d.client, err);
-		return d.f.reply(Instance, { content: "I'm sorry! An unexpected bug has happened! The error has been already reported~" });
+		return d.Util.reply(Instance, { content: "I'm sorry! An unexpected bug has happened! The error has been already reported~" });
 	}
 };
