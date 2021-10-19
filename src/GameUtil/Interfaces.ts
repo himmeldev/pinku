@@ -23,7 +23,7 @@ export interface HealingItem {
 	 * Type "life": Default current/MaxLife.
 	 * Type "special": SpecialBuff + Default current/MaxLife.
 	 */
-	Cooldown: string;
+	Cooldown: string | "none";
 	/**
 	 * Cooldown format example: "12s"
 	 */
