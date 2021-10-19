@@ -5,6 +5,7 @@ export interface Player {
 	hp: {
 		max: number;
 		current: number;
+        special: number;
 	};
 }
 
