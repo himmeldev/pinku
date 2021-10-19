@@ -40,7 +40,7 @@ export const run: RunEvent = async (d: D, message: Message) => {
 	Instance.command = command;
 
 	try {
-		if (command.category === "developer" && !d.client.d.owner(message.author.id)) return d.Util.reply(Instance, { content: "Oops~ This command is only for my developers!" });
+		if (command.category === "developer" && !d.client.data.owner(message.author.id)) return d.Util.reply(Instance, { content: "Oops~ This command is only for my developers!" });
 
 		const target = command.cooldown.type === "user" ? message.author.id : message.guild.id;
 		const InCooldown = await d.Util.setCD(command, target, Instance);
