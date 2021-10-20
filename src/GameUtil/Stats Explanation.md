@@ -10,7 +10,7 @@ interface Stat {
 }
 ```
 
-If the value is set to `max`, the function (Not Finished yet.) would automatically set the `PlayerStatValue` ot its `StatMaxValue` available in the `Stats.ts` file.
+If the value is set to `max`, the function (`ApplyStats(d: D, Target: Player, stat: Stat)`) would automatically set the `PlayerStatValue` ot its `StatMaxValue` available in the `Stats.ts` file.
 
 Some examples would be:
 
