@@ -1,5 +1,6 @@
 import { D } from "../../Util/Interfaces";
 import { Effect, Player } from "../Interfaces";
+import { ApplyStats } from "./ApplyStats";
 
 export const ApplyBuffs = (d: D, Target: Player, BuffList: Effect[]): Player => {
 	for (let i = 0; i < BuffList.length; i++) {
@@ -12,10 +13,8 @@ export const ApplyBuffs = (d: D, Target: Player, BuffList: Effect[]): Player => 
 		}
 
 		Target[CurrentEffect.Type + "s"][_i] = CurrentEffect;
+		Target = ApplyStats(d, Target, CurrentEffect.Stats);
 	}
-
-	// TODO: Finish the Stats improvements *included in the CurrentEffect.Stats property* function.
-	// // This is going to be hell.
 
 	return Target;
 };
