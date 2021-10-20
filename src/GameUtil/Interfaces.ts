@@ -51,6 +51,7 @@ export interface Effect {
 export interface Stat {
 	name: "life" | "strength" | "speed";
 	value: number | "max";
+	type: "upgrade" | "buff";
 	/**
 	 * Example value: +5 | -20 | 1
 	 * Value will be used to 'set' the value within the player data.

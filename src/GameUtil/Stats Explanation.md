@@ -6,6 +6,7 @@ To make a stat object you'll first have to make an object like the one in `./Int
 interface Stat {
 	name: "name of the stats, these will be available in the Stats.ts file.";
 	value: number | "max";
+    type: "upgrade" | "buff"
 }
 ```
 
@@ -16,17 +17,20 @@ Some examples would be:
 ```ts
 const MaxStat: Stat = {
     name: "life",
-    value: "max"
+    value: "max",
+    type: "upgrade"
 }
 
 const TemporalReducedStat: Stat = {
     name: "life",
-    value: -50
+    value: -50,
+    type: "buff"
 }
 
 const LifeUpgrade: Stat = {
     name: "life",
-    value: +20
+    value: +20,
+    type: "upgrade"
 }
 ```
 
@@ -35,7 +39,8 @@ const LifeUpgrade: Stat = {
 ```ts
 const StupidStat: Stat = {
     name: "life",
-    value: Infinity
+    value: Infinity,
+    type: "buff"
 }
 
 /**
