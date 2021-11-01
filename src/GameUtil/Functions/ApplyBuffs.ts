@@ -2,7 +2,7 @@ import { D } from "../../Util/Interfaces";
 import { Effect, Player } from "../Interfaces";
 import { ApplyStats } from "./ApplyStats";
 
-export const ApplyBuffs = (d: D, Target: Player, BuffList: Effect[]): Player => {
+export const ApplyBuffs = (Target: Player, BuffList: Effect[]): Player => {
 	for (let i = 0; i < BuffList.length; i++) {
 		const CurrentEffect: Effect = BuffList[i];
 
@@ -13,7 +13,7 @@ export const ApplyBuffs = (d: D, Target: Player, BuffList: Effect[]): Player => 
 		}
 
 		Target[CurrentEffect.Type + "s"][_i] = CurrentEffect;
-		Target = ApplyStats(d, Target, CurrentEffect.Stats);
+		Target = ApplyStats(Target, CurrentEffect.Stats);
 	}
 
 	return Target;
